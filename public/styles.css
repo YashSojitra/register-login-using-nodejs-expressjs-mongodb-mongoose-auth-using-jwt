@@ -74,7 +74,7 @@ a.nav:hover{
 }
 
 .containerL{
-    height:100%;
+    height:80%;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -116,7 +116,7 @@ a.nav:hover{
 
 /*registration page*/
 .containerR{
-    height:100%;
+    height:80%;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -141,5 +141,32 @@ a.nav:hover{
 
 .secretHeader{
     font-size:45px;
+}
+
+@media(max-width: 768px){
+    .navbar{
+        flex-direction: column;
+    }
+
+    .links{
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .containerL{
+        height: 80%;
+    }
+
+    .loginCard{
+        width: auto;
+        margin-left: 25px;
+        margin-right: 25px;
+    }
+
+    .secretHeader{
+        text-align: center;
+        font-size: 40px;
+        margin: 0 10px;
+    }
 }
 
