@@ -1,0 +1,145 @@
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@600&display=swap');
+body{
+    margin: 0;
+    padding: 0;
+    font-family: 'Quicksand', sans-serif;
+    width: 100%;
+    height: 100vh;
+    box-sizing: border-box;
+}
+.navbar{
+    background-color: rgb(144, 70, 228);
+    display:flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.logo{
+    margin-left: 5px;
+    color: white;
+}
+
+.logo:hover{
+    cursor: pointer;
+}
+
+.links{
+    display: flex;
+    align-items: center;
+    margin-right: 10px;
+}
+a{
+ text-decoration: none;
+}
+
+a.nav{
+    margin-left: 10px;
+    color: white;
+    border-radius: 5px;
+    padding: 5px;
+}
+
+a.nav:hover{
+    border-style: solid;
+    border-radius: 5px;
+    border-width: 2px;
+}
+
+.welcome{
+    font-size: 60px;
+ 
+}
+
+.intro{
+    font-size: 30px;
+    
+}
+
+.btn{
+    border: 1px solid;
+    border-radius: 5px;
+    padding: 5px;
+    background-color: rgb(144, 70, 228);
+    color: #fff;
+}
+
+.btn:hover{
+    background-color: rgb(144, 70, 228, 0.8); 
+}
+
+.container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.containerL{
+    height:100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.loginCard{
+    background-color: rgb(144, 70, 228);
+    border-radius:5px;
+    color: #fff;
+    text-align: center;
+    width: 20%;
+    font-size: 25px;
+}
+
+.email, .password{
+    margin: 10px 20px;
+    width: 80%;
+    height: 25px;
+    font-family: 'Quicksand', sans-serif;
+    padding: 5px;
+}
+
+ .login, .register{
+    font-family: 'Quicksand', sans-serif;
+    font-size:16px;
+    border: 1px solid;
+    border-radius: 5px;
+    padding: 5px;
+    background-color: rgb(79, 189, 52);
+    color: #fff;
+    margin: 10px;
+    width: 85%;
+}
+
+.login:hover, .register:hover{
+    background-color: rgb(79, 189, 52, 0.8);
+    cursor: pointer; 
+}
+
+/*registration page*/
+.containerR{
+    height:100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.registerCard{
+    background-color: rgb(144, 70, 228);
+    border-radius:5px;
+    color: #fff;
+    text-align: center;
+    width: 20%;
+    font-size: 25px;
+}
+
+.containerS{
+    width: 100%;
+    height:80%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.secretHeader{
+    font-size:45px;
+}
+

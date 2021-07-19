@@ -1,0 +1,14 @@
+<div class='navbar'>
+    <a href='/'>
+        <h1 class='logo'>Login-Register App</h1>
+    </a>
+    <div class='links'>
+        {{#if user}}
+        <a class='nav' href="/logout">Logout</a>
+
+        {{else}}
+        <a class='nav' href={{login}}>Login</a>
+        <a class='nav' href={{register}}>Register</a>
+        {{/if}}
+    </div>
+</div>  
