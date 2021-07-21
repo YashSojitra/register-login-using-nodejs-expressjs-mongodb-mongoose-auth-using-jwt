@@ -89,7 +89,7 @@ a.nav:hover{
     font-size: 25px;
 }
 
-.email, .password{
+.email, .password, .repassword{
     margin: 10px 20px;
     width: 80%;
     height: 25px;

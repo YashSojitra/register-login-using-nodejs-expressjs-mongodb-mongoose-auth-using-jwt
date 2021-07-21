@@ -9,14 +9,10 @@ const userSchema = new mongoose.Schema({
     password: {
         type: String,
         required: true
-    },
-    repassword: {
-        type: String,
-        required: true
     }
 
 })
 
 //creating model using schema
-const userCollection = new mongoose.model('user',userSchema);
+const userCollection = new mongoose.model('users',userSchema);
 module.exports = userCollection;

@@ -3,6 +3,9 @@ const app = express();
 const path = require('path');
 const hbs = require('hbs');
 const port = process.env.PORT || 8000;
+const validator = require('validator');
+const userCollection = require("./models/schema");
+require("./db/dbConnection");
 
 //middlewares
 app.use(express.json());
@@ -14,6 +17,8 @@ app.set('views', path.join(__dirname,'../templates/views'));
 hbs.registerPartials(path.join(__dirname,'../templates/partials'));
 
 //routing
+
+// dealing with get requests
 app.get('/', (req, res) => {
     res.render('index.hbs',{
         user: false,
@@ -50,6 +55,35 @@ app.get('/logout', (req, res) => {
     res.redirect('/');
 })
 
+//dealing with post requests
+app.post('/register', async (req, res) => {
+    try {
+        const email = req.body.email;
+        const password = req.body.password;
+        const repassword = req.body.repassword;
+
+        console.log(`email: ${email}  password: ${password}`);
+        if(!(validator.isEmail(email))){
+            res.status(400).send("Enter Valid Email");
+        }
+        if(password !== repassword){
+            res.status(400).send("Passwords must be same!!");
+        }
+        else{
+            const registerUser = new userCollection({
+                email, password
+            }) ;
+
+            const userRegistered = await registerUser.save();
+            console.log(`the page part: ${userRegistered}`);
+            res.status(201).render('secret.hbs');
+        }
+        
+    } catch (err) {
+        console.log(err);
+    }
+})
+
 app.listen(port, () => {
-    console.log(`------Listening to the port ${port}`);
+    console.log(`------Listening to the port ${port}------`);
 })

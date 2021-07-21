@@ -10,7 +10,8 @@
     "express": "^4.17.1",
     "hbs": "^4.1.2",
     "jsonwebtoken": "^8.5.1",
-    "mongoose": "^5.13.2"
+    "mongoose": "^5.13.2",
+    "validator": "^13.6.0"
   },
   "devDependencies": {},
   "scripts": {
