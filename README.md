@@ -20,6 +20,7 @@ I have also learned Handlebars(hbs) for client side template engine.
 ![](./Screenshots/1.png)
 ![](./Screenshots/2.png)
 ![](./Screenshots/3.png)
+![](./Screenshots/6.png)
 ![](./Screenshots/4.png)
 ![](./Screenshots/5.png)
 
