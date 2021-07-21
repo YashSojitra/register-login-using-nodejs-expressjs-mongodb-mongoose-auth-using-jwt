@@ -7,11 +7,14 @@ const validator = require('validator');
 const userCollection = require("./models/schema");
 require("./db/dbConnection");
 const bcrypt = require('bcryptjs');
+const auth = require("./middleware/auth");
+const cookieParser = require('cookie-parser');
 
 //middlewares
 app.use(express.json());
 app.use(express.urlencoded({extended: false}));
 app.use(express.static(path.join(__dirname, '../public')));
+app.use(cookieParser());
 
 app.set('view engine', 'hbs');
 app.set('views', path.join(__dirname,'../templates/views'));
@@ -44,7 +47,7 @@ app.get('/login', (req, res) => {
     });
 })
 
-app.get('/secret', (req, res) => {
+app.get('/secret', auth, (req, res) => {
     res.render('secret.hbs',{
         user: true,
         register: "/register",
@@ -52,8 +55,19 @@ app.get('/secret', (req, res) => {
     });
 })
 
-app.get('/logout', (req, res) => {
-    res.redirect('/');
+//logout request
+app.get('/logout',auth,async (req, res) => {
+    try {
+        req.user.tokens = req.user.tokens.filter((currentElement) => {
+            return currentElement.token !== req.token;      //filtering tokens which are not equal to cookie token
+        })
+        res.clearCookie("tkn");
+        await req.user.save();
+        res.redirect('/');
+    } catch (error) {
+        res.status(500).send(error);
+        console.log(error);
+    }
 })
 
 //dealing with post requests
@@ -76,10 +90,18 @@ app.post('/register', async (req, res) => {
             const registerUser = new userCollection({
                 email, password
             }) ;
-            
-            const userRegistered = await registerUser.save();
+
+            //generating token
+            const token = await registerUser.generateToken();
+
+            //generating cookie
+            res.cookie("tkn", token, { 
+                expires: new Date(Date.now() + 1000000),
+                httpOnly: true});
+
+            await registerUser.save();
             // console.log(`the page part: ${userRegistered}`);
-            res.status(201).render('secret.hbs');
+            res.status(201).redirect('/secret');
         }
         
     } catch (err) {
@@ -99,8 +121,18 @@ app.post('/login', async (req, res) => {
             res.status(400).send("User not found");
         }
         else{
-            if(dbUserData.password === password){
-                res.status(200).render('secret.hbs');
+            const isPassMatching = await bcrypt.compare(password, dbUserData.password);
+
+            if(isPassMatching){
+                //creating jwt 
+                const token = await dbUserData.generateToken();
+
+                //generating cookie
+                res.cookie("tkn", token, { 
+                    expires: new Date(Date.now() + 1000000),
+                    httpOnly: true});
+
+                res.status(200).redirect('/secret');
             }
             else{
                 res.status(400).send("Invalid Login Details");
