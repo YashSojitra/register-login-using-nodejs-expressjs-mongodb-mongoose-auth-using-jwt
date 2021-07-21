@@ -6,6 +6,7 @@ const port = process.env.PORT || 8000;
 const validator = require('validator');
 const userCollection = require("./models/schema");
 require("./db/dbConnection");
+const bcrypt = require('bcryptjs');
 
 //middlewares
 app.use(express.json());
@@ -75,7 +76,7 @@ app.post('/register', async (req, res) => {
             const registerUser = new userCollection({
                 email, password
             }) ;
-
+            
             const userRegistered = await registerUser.save();
             // console.log(`the page part: ${userRegistered}`);
             res.status(201).render('secret.hbs');
