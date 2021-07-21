@@ -56,13 +56,15 @@ app.get('/logout', (req, res) => {
 })
 
 //dealing with post requests
+
+//registeration of the user
 app.post('/register', async (req, res) => {
     try {
         const email = req.body.email;
         const password = req.body.password;
         const repassword = req.body.repassword;
 
-        console.log(`email: ${email}  password: ${password}`);
+        // console.log(`email: ${email}  password: ${password}`);
         if(!(validator.isEmail(email))){
             res.status(400).send("Enter Valid Email");
         }
@@ -75,10 +77,35 @@ app.post('/register', async (req, res) => {
             }) ;
 
             const userRegistered = await registerUser.save();
-            console.log(`the page part: ${userRegistered}`);
+            // console.log(`the page part: ${userRegistered}`);
             res.status(201).render('secret.hbs');
         }
         
+    } catch (err) {
+        console.log(err);
+    }
+})
+
+//login activity of the user
+app.post('/login', async (req, res) => {
+    try {
+        const email = req.body.email;
+        const password = req.body.password;
+
+        const dbUserData = await userCollection.findOne({email});
+
+        if(dbUserData === null) {
+            res.status(400).send("User not found");
+        }
+        else{
+            if(dbUserData.password === password){
+                res.status(200).render('secret.hbs');
+            }
+            else{
+                res.status(400).send("Invalid Login Details");
+            }
+        }
+
     } catch (err) {
         console.log(err);
     }
