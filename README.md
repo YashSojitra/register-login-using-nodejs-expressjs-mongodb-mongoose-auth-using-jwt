@@ -8,13 +8,13 @@ I have also learned Handlebars(hbs) for client side template engine.
 
 ### Technology Used:
 
-*Node.js / for javascript run time environment
-*ExpressJS
-*Handlebars as Template Engine
-*JSON Web Tokens for authentication
-*MongoDB Atlas for storing user data
-*mongoose to model data
-*Bcryptjs for Hashing passwords
+* Node.js
+* ExpressJS
+* Handlebars as Template Engine
+* JSON Web Tokens for authentication
+* MongoDB Atlas for storing user data
+* mongoose to model data
+* Bcryptjs for Hashing passwords
 
 ### Screenshots
 ![](./Screenshots/1.png)
